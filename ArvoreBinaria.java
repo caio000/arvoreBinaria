@@ -1,4 +1,4 @@
-package arvore;
+//package arvore;
 
 public class ArvoreBinaria {
 
@@ -19,7 +19,7 @@ public class ArvoreBinaria {
 		exibir(raiz);
 		
 		
-		System.out.println("Removeu " + removeTodos(raiz, 10) + " n�s.");
+		System.out.println("Removeu " + removeTodos(raiz, 10) + " nos.");
 		
 		System.out.println("Nivel da arvore: " + contaNiveis(raiz));
 		
@@ -36,7 +36,7 @@ public class ArvoreBinaria {
 
 	}
 
-	// ======================fun��es============================================================================================
+	// ======================funções============================================================================================
 
 	public static int contaNiveis(No n){
 		int  xe=1, xd=1;
@@ -105,7 +105,6 @@ public class ArvoreBinaria {
 		return ponteiro;
 	}
 	
-	
 	public static int contaFilhos(No ponteiro) {
 		int result;
 		if (ponteiro.direita == null && ponteiro.esquerda == null) {
@@ -117,7 +116,6 @@ public class ArvoreBinaria {
 		}
 		return result;
 	}
-	
 	
 	public static void exibir(No ponteiro) {
 		if (ponteiro!= null) {
