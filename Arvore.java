@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 import javax.swing.JFileChooser;
+
 import java.util.ArrayList;
 
 
@@ -54,6 +55,7 @@ public class Arvore {
         
 		// O METODO ABAIXO EXIBE UMA ARVORE
         exibeArvore();
+        System.out.println("Total de nós: " + contaNos(inicio));
         
         // NA LINHA ABAIXO, ï¿½ EXIBIDO O Nï¿½MERO DE Nï¿½VEIS, UTILIZADO O Mï¿½TODO contaNiveis QUE RETORNA O NUMERO DE NIVEIS DE UMA ARVORE (OU SUB-ARVORE) EM QUE O ELEMENTO RAï¿½Z ï¿½ PASSADO POR PARAMETRO
         // System.out.println(contaNiveis(inicio)+" nï¿½veis");
@@ -88,11 +90,27 @@ public class Arvore {
         exibeArvore();
         */
         
+        /*
         int maiorValor = maiorValor(inicio).valor;
         System.out.println("Maior valor: " + maiorValor);
         
         removePrimos(maiorValor);
+        */
+        
+        /*
+        removeImparesDireita(inicio.direita);
         exibeArvore();
+        
+        removeParEsquerda(inicio.esquerda);
+        exibeArvore();
+        */
+        
+        
+        removeNoUmFilho(inicio);
+        exibeArvore();
+        
+        System.out.println("Total de nós: " + contaNos(inicio));
+        
         
         //conta nï¿½veis
         //System.out.println("\n ï¿½rvore com "+contaNiveis(inicio)+" Nï¿½veis");
@@ -456,5 +474,92 @@ public class Arvore {
     	
     }
     
+    /**
+     * Essa função remove todos os nós com valores impares da sub-arvore a direita.
+     * 
+     * @author Caio de Freitas Adriano
+     * @since 2016-06-26
+     * 
+     * @param No ponteiro: recebe o nó raiz da sub-arvore a direita.
+     */
+    public static void removeImparesDireita(No ponteiro) {
+    	
+    	// verifica se o Nó existe e se ele é impar
+    	if (ponteiro != null && ponteiro.valor % 2 == 1)
+    		removeNo(inicio, ponteiro.valor);
+    	
+    	if (ponteiro != null) {
+    		removeImparesDireita(ponteiro.esquerda);
+        	removeImparesDireita(ponteiro.direita);
+        	
+        	if (ponteiro != null && ponteiro.valor % 2 == 1)
+        		removeNo(inicio, ponteiro.valor);
+    	}
+    	
+    	
+    }
+    /**
+     * Essa função remove todos os nós com valores pares da sub-arvore a esquerda.
+     * 
+     * @author Caio de Freitas Adriano
+     * @since 2016-06-26
+     * 
+     * @param No ponteiro: recebe o nó raiz da sub-arvore a esquerda.
+     */
+    public static void removeParEsquerda(No ponteiro) {
+    	
+    	// verifica se o nó existe e se ele é par
+    	if (ponteiro != null && ponteiro.valor % 2 == 0)
+    		removeNo(inicio, ponteiro.valor);
+    	
+    	if (ponteiro != null) {
+    		removeParEsquerda(ponteiro.esquerda);
+    		removeParEsquerda(ponteiro.direita);
+    		
+    		if (ponteiro != null && ponteiro.valor % 2 == 0)
+        		removeNo(inicio, ponteiro.valor);
+    	}
+    	
+    }
+    /**
+     * Essa função remove da árvore todos os nós que possu apenas um filho.
+     * Sobrando apenas os nós folhas, com dois filhos ou apenas o nó raiz.
+     * 
+     * @author Caio de Freitas Adriano
+     * @since 2016-06-26
+     * 
+     * @param No ponteiro: raiz da árvore binária.
+     */
+    public static void removeNoUmFilho(No ponteiro) {
+    	
+    	if (ponteiro != null && contaFilhos(inicio, ponteiro.valor) == 1)
+    		removeNo(inicio, ponteiro.valor);
+    	
+    	if (ponteiro != null) {
+    		removeNoUmFilho(ponteiro.esquerda);
+    		removeNoUmFilho(ponteiro.direita);
+    	}
+    }
+    /**
+     * Conta quantos nós a árvore possui.
+     * 
+     * @author Caio de Freitas Adriano
+     * @since 26-06-2016
+     * 
+     * @param No ponteiro: nó raiz da árvore.
+     * 
+     * @return int qtd: quantidade de nós que a árvore possui.
+     */
+    public static int contaNos(No ponteiro) {
+		int qtd = 0;
+		
+		if (ponteiro != null){
+			qtd++;
+			qtd += contaNos(ponteiro.esquerda);
+			qtd += contaNos(ponteiro.direita);
+		}
+			
+		return qtd;
+	}
     
 }
