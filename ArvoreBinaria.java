@@ -168,6 +168,17 @@ public class ArvoreBinaria {
 		
 	}
 	
+	public static int contaNos(No ponteiro) {
+		int qtd = 0;
+		
+		if (ponteiro != null){
+			qtd++;
+			qtd += contaNos(ponteiro.esquerda);
+			qtd += contaNos(ponteiro.direira);
+		}
+			
+		return qtd;
+	}
 }
 
 
