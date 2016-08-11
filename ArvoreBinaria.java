@@ -174,7 +174,7 @@ public class ArvoreBinaria {
 		if (ponteiro != null){
 			qtd++;
 			qtd += contaNos(ponteiro.esquerda);
-			qtd += contaNos(ponteiro.direira);
+			qtd += contaNos(ponteiro.direita);
 		}
 			
 		return qtd;
